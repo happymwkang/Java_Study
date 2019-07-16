@@ -15,7 +15,8 @@ public class Cart {
 	private ArrayList<String> sizes;
 	private ArrayList<Integer> prices;
 	
-	/* add나 del과 같은 메소드들이 mvc패턴의 구조에서 dto단계 보다는 service에서 구현되야 하지 않았었나.. */
+	/* Code Review
+	add나 del과 같은 메소드들이 mvc패턴의 구조에서 dto단계 보다는 service에서 구현되야 하지 않았었나.. */
 	
 	public void add (String name, String size, int price) {
 		names.add(name);
