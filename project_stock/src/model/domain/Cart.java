@@ -15,6 +15,8 @@ public class Cart {
 	private ArrayList<String> sizes;
 	private ArrayList<Integer> prices;
 	
+	/* add나 del과 같은 메소드들이 mvc패턴의 구조에서 dto단계 보다는 service에서 구현되야 하지 않았었나.. */
+	
 	public void add (String name, String size, int price) {
 		names.add(name);
 		sizes.add(size);
@@ -48,13 +50,13 @@ public class Cart {
 	@Override
 	public String toString() {
 	      StringBuilder builder = new StringBuilder();
-	      builder.append(" 1. ��ǰ�� : ");
+	      builder.append(" 1. Á¦Ç°¸í : ");
 	      builder.append(names);
-	      builder.append("\n 2. ���� : ");
+	      builder.append("\n 2. °¡°Ý : ");
 	      builder.append(prices);
-	      builder.append("\n 3. ������ : ");
+	      builder.append("\n 3. »çÀÌÁî : ");
 	      builder.append(sizes);
-	      builder.append("\n 4. �Ѿ� : ");
+	      builder.append("\n 4. ÃÑ¾× : ");
 	      builder.append(amounts);
 	      return builder.toString();
 		}
