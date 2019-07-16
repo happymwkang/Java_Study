@@ -22,9 +22,14 @@ public class Service {
 	public static Service getInstance() {
 		return instance;
 	}
-	// -----------------------Àç°í °ü¸® ±â´É----------------------------
+	// -----------------------ì¬ê³  ê´€ë¦¬ ê¸°ëŠ¥----------------------------
 	
-	// »óÇ°¸íÀ¸·Î »óÇ° °Ë»ö
+	/* ë³€ìˆ˜ëª…ì´ ë™ì¼í•˜ê²Œ cë¡œ ë§ì´ ë“±ì¥ í•˜ëŠ”ë°, ì¸ìˆ˜ì¸ê³„ë‚˜ ì‹œê°„ì´ íë¥¸ ë’¤ ì¶”ê°€ê°œë°œ ìš”ê±´ì´ ìˆì„ë•Œ,
+	  ìœ ì˜ë¯¸í•œ ë³€ìˆ˜ëª…ìœ¼ë¡œ ë°”ë€ë‹¤ë©´ ê°€ë…ì„±ì´ ë” ìƒìŠ¹í• ë“¯ ex. clothes, goods, product....
+	*/
+	
+	
+	// ìƒí’ˆëª…ìœ¼ë¡œ ìƒí’ˆ ê²€ìƒ‰
 	public Clothes getClothes(String name) {
 		for (Clothes c : stockList.getStockList()) {
 			if (name.equals(c.getName())) {
@@ -36,18 +41,18 @@ public class Service {
 		return null;
 	}
 
-	// ¸ğµç Ç°¸ñ ¹İÈ¯
+	// ëª¨ë“  í’ˆëª© ë°˜í™˜
 	public ArrayList<Clothes> getAllClothes() {
 		logger.info("print all products");
 		return stockList.getStockList();
 	}
 
-	// »õ »óÇ° Ãß°¡
-	public void insertClothes(Clothes c) {
+	// ìƒˆ ìƒí’ˆ ì¶”ê°€
+	public void insertClothes(Clothes c) {  
 		stockList.insertClothes(c);
 	}
 
-	// Ç°¸ñ °¡°İº¯°æ
+	// í’ˆëª© ê°€ê²©ë³€ê²½
 	public void changePrice(String name, int price) throws NotExistException {
 		Clothes c = getClothes(name);
 		if (c != null) {
@@ -55,11 +60,11 @@ public class Service {
 			c.setPrice(price);
 		} else {
 			logger.warn("fail to change price of product " + name);
-			throw new NotExistException("»óÇ°ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
+			throw new NotExistException("ìƒí’ˆì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤");
 		}
 	}
 
-	// Àç°í ³»¿ë º¯°æ(¼ö·®, »çÀÌÁî)
+	// ì¬ê³  ë‚´ìš© ë³€ê²½(ìˆ˜ëŸ‰, ì‚¬ì´ì¦ˆ)
 	public void changeStock(String name, String size, int stock) throws NotExistException {
 		Clothes c = getClothes(name);
 		if (c != null) {
@@ -70,11 +75,11 @@ public class Service {
 			logger.info("change stock of product " + name + "(" + size + ")");
 		} else {
 			logger.warn("change stock of product " + name + "(" + size + ")");
-			throw new NotExistException("»óÇ°ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù");
+			throw new NotExistException("ìƒí’ˆì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤");
 		}
 	}
 
-	// ¹°Ç° ÀüÃ¼ »èÁ¦(°í°´ Àå¹Ù±¸´Ï¿¡¼­µµ »èÁ¦)
+	// ë¬¼í’ˆ ì „ì²´ ì‚­ì œ(ê³ ê° ì¥ë°”êµ¬ë‹ˆì—ì„œë„ ì‚­ì œ)
 	public void delClothes(String name) {
 		Clothes c = getClothes(name);
 		if (c != null) {
@@ -87,14 +92,14 @@ public class Service {
 		}
 	}
 
-	// --------------------------°í°´ °ü¸® ±â´É------------------------------
+	// --------------------------ê³ ê° ê´€ë¦¬ ê¸°ëŠ¥------------------------------
 
-	// ¸ğµç °í°´ Á¤º¸ Ãâ·Â
+	// ëª¨ë“  ê³ ê° ì •ë³´ ì¶œë ¥
 	public ArrayList<Customer> getAllCustomer() {
 		return customerList.getCustomerList();
 	}
 
-	// ÀÌ¸§À¸·Î °í°´ °Ë»ö
+	// ì´ë¦„ìœ¼ë¡œ ê³ ê° ê²€ìƒ‰
 	public Customer getCustomer(String name) throws NotExistException {
 		for (Customer c : customerList.getCustomerList()) {
 			if (name.equals(c.getName())) {
@@ -103,10 +108,10 @@ public class Service {
 			}
 		}
 		logger.warn("fail to find customer " + name);
-		throw new NotExistException("Á¸ÀçÇÏÁö ¾Ê´Â °í°´ÀÔ´Ï´Ù");
+		throw new NotExistException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³ ê°ì…ë‹ˆë‹¤");
 	}
 
-	// Àå¹Ù±¸´Ï Ãß°¡
+	// ì¥ë°”êµ¬ë‹ˆ ì¶”ê°€
 	public void addCart(String name, String clothesName, String size) throws NotExistException {
 		Clothes c = getClothes(clothesName);
 		Customer customer = getCustomer(name);
@@ -129,14 +134,14 @@ public class Service {
 					changeStock(clothesName, size, -1);
 				}
 			} else {
-				throw new NotExistException("Àç°í°¡ ºÎÁ·ÇÕ´Ï´Ù");
+				throw new NotExistException("ì¬ê³ ê°€ ë¶€ì¡±í•©ë‹ˆë‹¤");
 			}
 		} else {
-			throw new NotExistException("°í°´¸í ¶Ç´Â Á¦Ç°¸íÀÌ Àß¸øµÇ¾ú½À´Ï´Ù");
+			throw new NotExistException("ê³ ê°ëª… ë˜ëŠ” ì œí’ˆëª…ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤");
 		}
 	}
 
-	// Àå¹Ù±¸´Ï Á¦°Å
+	// ì¥ë°”êµ¬ë‹ˆ ì œê±°
 	public void delCart(String name, String clothesName, String size) throws NotExistException {
 		Clothes c = getClothes(clothesName);
 		Customer customer = getCustomer(name);
@@ -146,14 +151,14 @@ public class Service {
 				cart.del(clothesName, size, c.getPrice());
 				changeStock(clothesName, size, +1);
 			} else {
-				throw new NotExistException("ÇØ´ç Ç°¸ñÀÌ Àå¹Ù±¸´Ï¿¡ ¾ø½À´Ï´Ù");
+				throw new NotExistException("í•´ë‹¹ í’ˆëª©ì´ ì¥ë°”êµ¬ë‹ˆì— ì—†ìŠµë‹ˆë‹¤");
 			}
 		} else {
-			throw new NotExistException("°í°´¸í ¶Ç´Â Á¦Ç°¸íÀÌ Àß¸øµÇ¾ú½À´Ï´Ù");
+			throw new NotExistException("ê³ ê°ëª… ë˜ëŠ” ì œí’ˆëª…ì´ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤");
 		}
 	}
 
-	// ÃÑ¾× °è»ê
+	// ì´ì•¡ ê³„ì‚°
 	public int getAmounts(String name) throws NotExistException {
 		Customer c = getCustomer(name);
 		System.out.println(c);
@@ -170,19 +175,19 @@ public class Service {
 			}
 		}
 		logger.warn("fail to print amount of customer" + name);
-		throw new NotExistException("Á¸ÀçÇÏÁö ¾Ê´Â °í°´ÀÔ´Ï´Ù");
+		throw new NotExistException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³ ê°ì…ë‹ˆë‹¤");
 	}
 
-	// °í°´ Àå¹Ù±¸´Ï ¹İÈ¯
+	// ê³ ê° ì¥ë°”êµ¬ë‹ˆ ë°˜í™˜
 	public Cart getCart(String name) throws NotExistException {
 		Customer c = getCustomer(name);
 		if (c != null) {
 			return c.getCart();
 		}
-		throw new NotExistException("Á¸ÀçÇÏÁö ¾Ê´Â °í°´ÀÔ´Ï´Ù");
+		throw new NotExistException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³ ê°ì…ë‹ˆë‹¤");
 	}
 
-	// Æ¯Á¤¹°Ç° Àå¹Ù±¸´Ï¿¡ ´ãÀº °í°´ °Ë»ö
+	// íŠ¹ì •ë¬¼í’ˆ ì¥ë°”êµ¬ë‹ˆì— ë‹´ì€ ê³ ê° ê²€ìƒ‰
 	/*
 	public ArrayList<Customer> searchCustomerWhoBought(String clothes) throws NotExistException {
 		ArrayList<Customer> found = new ArrayList<Customer>();
@@ -190,7 +195,7 @@ public class Service {
 			if (customer.getCart().getNames().contains(clothes)) {
 				found.add(customer);
 			}
-			throw new NotExistException("°Ë»öÇÏ½Å Ç°¸ñÀ» Àå¹Ù±¸´Ï¿¡ ´ãÀ¸½Å °í°´ÀÌ ¾ø½À´Ï´Ù.");				
+			throw new NotExistException("ê²€ìƒ‰í•˜ì‹  í’ˆëª©ì„ ì¥ë°”êµ¬ë‹ˆì— ë‹´ìœ¼ì‹  ê³ ê°ì´ ì—†ìŠµë‹ˆë‹¤.");				
 			
 		}
 		return found;
